@@ -13,48 +13,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #14100b;
-    color: #e6ddc9;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif, system-ui, sans-serif;
+    background: #0A0A0A;
+    color: #ECECEC;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
     padding: 24px;
   }
   .panel {
     width: 100%;
     max-width: 640px;
-    border: 1px solid #3a2f1e;
-    border-radius: 14px;
-    padding: 32px 36px;
-    background: rgba(30, 24, 16, 0.6);
-    box-shadow: 0 0 40px rgba(230, 170, 60, 0.08);
+    border: 1px solid #222222;
+    border-radius: 16px;
+    padding: 40px 44px;
+    background: #141414;
   }
-  h1 { margin: 0 0 4px; font-size: 26px; color: #f4e9d2; }
-  .sub { margin: 0 0 28px; color: #b89a5e; font-size: 13px; letter-spacing: 1px; }
-  h2 { font-size: 16px; color: #f0c674; margin: 28px 0 8px; }
-  p, li { color: #e6ddc9; font-size: 15px; }
-  a { color: #f0c674; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .brand .dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #FFB300; display: flex; align-items: center; justify-content: center; font-size: 24px;
+  }
+  h1 { margin: 0; font-size: 28px; font-weight: 700; color: #ECECEC; }
+  .sub { margin: 0 0 26px; color: #A0A0A0; font-size: 13px; letter-spacing: .4px; }
+  h2 { font-size: 17px; font-weight: 600; color: #FFB300; margin: 28px 0 8px; }
+  p, li { color: #ECECEC; font-size: 15px; }
+  a { color: #FFB300; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { color: #FFFFFF; }
   .email {
     display: inline-block;
     margin-top: 4px;
-    padding: 8px 14px;
-    border: 1px solid #3a2f1e;
-    border-radius: 8px;
-    background: rgba(60, 45, 25, 0.5);
+    padding: 10px 18px;
+    border-radius: 9999px;
+    background: #FFB300;
+    color: #1E1300;
+    font-weight: 600;
     text-decoration: none;
-    color: #f4e9d2;
   }
+  .email:hover { background: #FFC233; text-decoration: none; }
   .links { margin-top: 8px; }
-  footer { margin-top: 32px; font-size: 12px; color: #8a7550; }
+  footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #222222; font-size: 12px; color: #606060; }
 </style>
 </head>
 <body>
   <main class="panel">
-    <h1>EarString</h1>
-    <p class="sub">GUITAR TUNER, CHORD &amp; STEM TRAINER — SUPPORT</p>
+    <div class="brand">
+      <span class="dot">🎸</span>
+      <div>
+        <h1>EarString</h1>
+        <p class="sub">GUITAR TUNER, CHORD &amp; STEM TRAINER</p>
+      </div>
+    </div>
 
-    <p>EarString helps guitarists learn songs: a chromatic tuner, automatic
-    chord and beat detection, slow-down without pitch change, A–B loops, and
-    on-device stem separation to isolate or mute individual instruments.</p>
+    <p>EarString helps guitarists learn songs: a chromatic tuner, AI chord and
+    beat detection, slow-down without pitch change, A–B loops, and on-device
+    AI stem separation to isolate or mute individual instruments.</p>
 
     <h2>Need help?</h2>
     <p>For questions, bug reports, or feedback, get in touch:</p>
@@ -79,7 +91,7 @@
       <a href="terms.html">Terms of Use</a>
     </p>
 
-    <footer>&copy; 2026 EarString.</footer>
+    <footer>&copy; 2026 EarString</footer>
   </main>
 </body>
 </html>
