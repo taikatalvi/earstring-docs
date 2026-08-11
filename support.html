@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EarString — Support</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='229' fill='%23FFB300'/%3E%3Cg transform='translate(140,180) scale(27.7)' fill='none' stroke='%231B1B1F' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l12-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='16' r='3'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0A0A0A;
+    color: #ECECEC;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 24px;
+  }
+  .panel {
+    width: 100%;
+    max-width: 640px;
+    border: 1px solid #222222;
+    border-radius: 16px;
+    padding: 40px 44px;
+    background: #141414;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .brand .logo { width: 48px; height: 48px; display: block; flex-shrink: 0; }
+  .brand > div { display: flex; flex-direction: column; justify-content: center; }
+  .brand h1 { margin: 0; line-height: 1.15; }
+  .brand .sub { margin: 3px 0 0; line-height: 1.2; }
+  h1 { margin: 0; font-size: 28px; font-weight: 700; color: #ECECEC; }
+  .sub { margin: 0 0 26px; color: #A0A0A0; font-size: 13px; letter-spacing: .4px; }
+  h2 { font-size: 17px; font-weight: 600; color: #FFB300; margin: 28px 0 8px; }
+  p, li { color: #ECECEC; font-size: 15px; }
+  a { color: #FFB300; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { color: #FFFFFF; }
+  .email {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 10px 18px;
+    border-radius: 9999px;
+    background: #FFB300;
+    color: #1E1300;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .email:hover { background: #FFC233; text-decoration: none; }
+  .appstore {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 12px 22px;
+    border-radius: 9999px;
+    background: #FFB300;
+    color: #1E1300;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .appstore:hover { background: #FFC233; text-decoration: none; }
+  .links { margin-top: 8px; }
+  footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #222222; font-size: 12px; color: #606060; }
+</style>
+</head>
+<body>
+  <main class="panel">
+    <div class="brand">
+      <a href="index.html" style="display:contents;">
+      <svg class="logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-label="EarString logo">
+        <defs>
+          <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFC233"/><stop offset="100%" stop-color="#F2A100"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="1024" height="1024" rx="229" ry="229" fill="url(#amber)"/>
+        <g transform="translate(140,180) scale(27.7)" fill="none" stroke="#1B1B1F"
+           stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+        </g>
+      </svg>
+      </a>
+      <div>
+        <h1>EarString</h1>
+        <p class="sub">SUPPORT</p>
+      </div>
+    </div>
+
+    <p>EarString helps guitarists learn songs: a chromatic tuner, AI chord and
+    beat detection, slow-down without pitch change, A–B loops, and on-device
+    AI stem separation to isolate or mute individual instruments.</p>
+
+    <h2>Need help?</h2>
+    <p>For questions, bug reports, or feedback, get in touch:</p>
+    <p><a class="email" href="mailto:taikatalvi13@gmail.com">taikatalvi13@gmail.com</a></p>
+
+    <h2>Common questions</h2>
+    <p><strong>Stem separation is slow or heats up my device.</strong>
+    Separation runs a neural model fully on-device; it's compute-heavy. Keep
+    the app in the foreground until it finishes — leaving the app cancels it.</p>
+    <p><strong>Online lyrics don't appear.</strong> Lyrics are fetched from a
+    public database by title and artist; some songs simply aren't in it. Make
+    sure the online lyrics option is enabled in settings and you're online.</p>
+
+    <h2>EarString Pro</h2>
+    <p>Stem separation is a Pro feature, available as a monthly subscription or
+    a one-time lifetime unlock. Manage or cancel subscriptions anytime in your
+    Apple ID account settings.</p>
+
+    <h2>Legal</h2>
+    <p class="links">
+      <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+      <a href="terms.html">Terms of Use</a> &nbsp;&middot;&nbsp;
+      <a href="index.html">Home</a>
+    </p>
+
+    <footer>&copy; 2026 EarString</footer>
+  </main>
+</body>
+</html>

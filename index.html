@@ -3,122 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EarString — Support</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='229' fill='%23FFB300'/%3E%3Cg transform='translate(140,180) scale(27.7)' fill='none' stroke='%231B1B1F' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l12-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='16' r='3'/%3E%3C/g%3E%3C/svg%3E">
+<title>EarString — Guitar Tuner, Chord &amp; Stem Trainer for iOS &amp; macOS</title>
+<meta name="description" content="EarString is a native guitar practice app for iOS and macOS: a chromatic tuner, AI chord and beat detection, slow-down without pitch change, A–B loops, a 10-band equalizer and on-device AI stem separation.">
 <style>
-  :root { color-scheme: dark; }
-  * { box-sizing: border-box; }
+  :root {
+    color-scheme: dark;
+    --bg: #0A0A0A;
+    --bg-soft: #101010;
+    --panel: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.08);
+    --text: #ECECEC;
+    --muted: #9A9A9A;
+    --accent: #FFB300;
+    --accent-2: #F2A100;
+    --good: #34D399;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  html, body { overflow-x: hidden; max-width: 100%; }
   body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0A0A0A;
-    color: #ECECEC;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(255,179,0,0.14), transparent 60%),
+      radial-gradient(900px 500px at 0% 0%, rgba(242,161,0,0.10), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    padding: 24px;
+    -webkit-font-smoothing: antialiased;
   }
-  .panel {
-    width: 100%;
-    max-width: 640px;
-    border: 1px solid #222222;
-    border-radius: 16px;
-    padding: 40px 44px;
-    background: #141414;
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: saturate(160%) blur(14px);
+    background: rgba(10,10,10,0.6);
+    border-bottom: 1px solid var(--border);
   }
-  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-  .brand .logo { width: 48px; height: 48px; display: block; flex-shrink: 0; }
-  .brand > div { display: flex; flex-direction: column; justify-content: center; }
-  .brand h1 { margin: 0; line-height: 1.15; }
-  .brand .sub { margin: 3px 0 0; line-height: 1.2; }
-  h1 { margin: 0; font-size: 28px; font-weight: 700; color: #ECECEC; }
-  .sub { margin: 0 0 26px; color: #A0A0A0; font-size: 13px; letter-spacing: .4px; }
-  h2 { font-size: 17px; font-weight: 600; color: #FFB300; margin: 28px 0 8px; }
-  p, li { color: #ECECEC; font-size: 15px; }
-  a { color: #FFB300; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  strong { color: #FFFFFF; }
-  .email {
-    display: inline-block;
-    margin-top: 4px;
-    padding: 10px 18px;
-    border-radius: 9999px;
-    background: #FFB300;
-    color: #1E1300;
-    font-weight: 600;
-    text-decoration: none;
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: .2px; }
+  .brand .mark { width: 30px; height: 30px; border-radius: 8px; display: block; }
+  .nav-links { display: flex; gap: 22px; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 560px) {
+    .nav-links { gap: 12px; }
+    .nav-links a:not(.btn) { display: none; }
   }
-  .email:hover { background: #FFC233; text-decoration: none; }
-  .appstore {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 12px 22px;
-    border-radius: 9999px;
-    background: #FFB300;
-    color: #1E1300;
-    font-weight: 700;
-    font-size: 15px;
-    text-decoration: none;
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 10px; font-weight: 700; font-size: 14px;
+    text-decoration: none; color: #1E1300;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 6px 20px rgba(255,179,0,0.25);
   }
-  .appstore:hover { background: #FFC233; text-decoration: none; }
-  .links { margin-top: 8px; }
-  footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid #222222; font-size: 12px; color: #606060; }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost {
+    color: var(--text); background: transparent; border: 1px solid var(--border); box-shadow: none;
+  }
+
+  header.hero { padding: 84px 0 40px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 999px; font-size: 12.5px; color: var(--accent);
+    border: 1px solid rgba(255,179,0,0.35); background: rgba(255,179,0,0.06);
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-size: clamp(34px, 6vw, 60px); line-height: 1.05; font-weight: 800; letter-spacing: -1px;
+    background: linear-gradient(180deg, #FFFFFF, #C7BBA9);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .lead { margin-top: 20px; font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); max-width: 620px; }
+  .cta-row { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .appstore-badge { display: inline-block; line-height: 0; transition: transform .15s ease; }
+  .appstore-badge:hover { transform: translateY(-2px); }
+  .appstore-badge img { height: 52px; width: auto; display: block; }
+
+  .mock {
+    margin-top: 54px;
+    border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .mock-bar { display: flex; align-items: center; gap: 8px; padding: 13px 16px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #FF5F57; } .dot.y { background: #FEBC2E; } .dot.g { background: #28C840; }
+  .mock-bar .title { margin-left: 8px; font-size: 12.5px; color: var(--muted); }
+  .mock-body { padding: 22px 20px 24px; }
+  .chords { display: flex; align-items: flex-end; justify-content: center; gap: 42px; margin-bottom: 20px; }
+  .chord { text-align: center; color: var(--muted); font-weight: 700; font-size: 20px; }
+  .chord.active { color: var(--accent); font-size: 30px; }
+  .wave { display: block; width: 100%; height: 54px; }
+  .transport { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; color: var(--muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  @media (max-width: 420px) {
+    .wrap { padding: 0 16px; }
+    .chords { gap: 26px; }
+  }
+
+  section { padding: 64px 0; }
+  .section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  h2 { font-size: clamp(24px, 3.6vw, 34px); font-weight: 800; letter-spacing: -.5px; }
+  .grid { margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    border: 1px solid var(--border); border-radius: 16px; padding: 22px; background: var(--panel);
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: rgba(255,179,0,0.4); }
+  .card .icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; margin-bottom: 14px; font-size: 20px;
+    background: linear-gradient(135deg, rgba(255,179,0,0.18), rgba(242,161,0,0.18)); }
+  .card h3 { font-size: 17px; margin-bottom: 6px; }
+  .card p { color: var(--muted); font-size: 14.5px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 34px; }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+  .plat { border: 1px solid var(--border); border-radius: 16px; padding: 24px; background: var(--panel); }
+  .plat h3 { font-size: 20px; display: flex; align-items: center; gap: 10px; }
+  .plat ul { list-style: none; margin-top: 14px; }
+  .plat li { padding: 7px 0 7px 26px; position: relative; color: var(--text); font-size: 15px; }
+  .plat li::before { content: ""; position: absolute; left: 0; top: 14px; width: 8px; height: 8px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+  .plat .note { color: var(--muted); font-size: 13px; margin-top: 12px; }
+
+  .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 34px; }
+  @media (max-width: 820px) { .pricing { grid-template-columns: 1fr; } }
+  .price { border: 1px solid var(--border); border-radius: 16px; padding: 26px; background: var(--panel); }
+  .price.pro { border-color: rgba(255,179,0,0.5); background: linear-gradient(180deg, rgba(255,179,0,0.1), rgba(242,161,0,0.04)); }
+  .price h3 { font-size: 19px; }
+  .price .amount { font-size: 30px; font-weight: 800; margin: 8px 0 4px; }
+  .price ul { list-style: none; margin-top: 14px; }
+  .price li { padding: 6px 0 6px 24px; position: relative; font-size: 14.5px; color: var(--text); }
+  .price li::before { content: "✓"; position: absolute; left: 0; color: var(--good); font-weight: 700; }
+
+  details { border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-top: 12px; background: var(--panel); }
+  summary { cursor: pointer; font-weight: 600; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  details p { color: var(--muted); margin-top: 10px; font-size: 14.5px; }
+
+  footer { border-top: 1px solid var(--border); padding: 34px 0 60px; margin-top: 30px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer a { color: var(--muted); text-decoration: none; font-size: 14px; margin-right: 18px; }
+  footer a:hover { color: var(--text); }
+  .muted { color: var(--muted); font-size: 13px; }
 </style>
 </head>
 <body>
-  <main class="panel">
-    <div class="brand">
-      <svg class="logo" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-label="EarString logo">
-        <defs>
-          <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FFC233"/><stop offset="100%" stop-color="#F2A100"/>
-          </linearGradient>
-        </defs>
-        <rect x="0" y="0" width="1024" height="1024" rx="229" ry="229" fill="url(#amber)"/>
-        <g transform="translate(140,180) scale(27.7)" fill="none" stroke="#1B1B1F"
-           stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-        </g>
-      </svg>
-      <div>
-        <h1>EarString</h1>
-        <p class="sub">GUITAR TUNER, CHORD &amp; STEM TRAINER</p>
+  <nav>
+    <div class="wrap">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="0" y="0" width="1024" height="1024" rx="229" fill="#FFB300"/>
+          <g transform="translate(140,180) scale(27.7)" fill="none" stroke="#1B1B1F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </g>
+        </svg>
+        EarString
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#platforms">Platforms</a>
+        <a href="#pricing">Pro</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn ghost" href="support.html">Support</a>
       </div>
     </div>
+  </nav>
 
-    <p>EarString helps guitarists learn songs: a chromatic tuner, AI chord and
-    beat detection, slow-down without pitch change, A–B loops, and on-device
-    AI stem separation to isolate or mute individual instruments.</p>
+  <header class="hero">
+    <div class="wrap">
+      <span class="badge">● On-device AI · nothing leaves your device</span>
+      <h1>Learn any song<br>by ear — faster.</h1>
+      <p class="lead">A native guitar practice app for iPhone, iPad and Mac. It hears
+      the chords, key and tempo, slows tricky parts down, loops them, tunes you up —
+      and splits a track into stems so you can isolate any instrument.</p>
+      <div class="cta-row">
+        <a class="appstore-badge" href="https://apps.apple.com/us/app/earstring/id6798832533?mt=12" target="_blank" rel="noopener">
+          <img src="img/appstore-badge.svg" alt="Download EarString on the App Store" width="140" height="47">
+        </a>
+        <a class="btn ghost" href="#features">Explore features</a>
+      </div>
 
-    <p><a class="appstore" href="https://apps.apple.com/app/earstring/id6798832533"
-      target="_blank" rel="noopener">Download on the App Store ↗</a></p>
+      <div class="mock" role="img" aria-label="EarString player preview">
+        <div class="mock-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="title">Future World.m4a · E minor · 195 BPM</span>
+        </div>
+        <div class="mock-body">
+          <div class="chords">
+            <div class="chord">Em</div>
+            <div class="chord active">G</div>
+            <div class="chord">D</div>
+          </div>
+          <svg class="wave" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="#FFB300">
+              <rect x="1" y="7" width="1.4" height="6"/><rect x="4" y="4" width="1.4" height="12"/><rect x="7" y="9" width="1.4" height="2"/><rect x="10" y="3" width="1.4" height="14"/><rect x="13" y="6" width="1.4" height="8"/><rect x="16" y="8" width="1.4" height="4"/><rect x="19" y="2" width="1.4" height="16"/><rect x="22" y="7" width="1.4" height="6"/><rect x="25" y="5" width="1.4" height="10"/><rect x="28" y="9" width="1.4" height="2"/><rect x="31" y="4" width="1.4" height="12"/><rect x="34" y="6" width="1.4" height="8"/><rect x="37" y="3" width="1.4" height="14"/><rect x="40" y="8" width="1.4" height="4"/><rect x="43" y="5" width="1.4" height="10"/><rect x="46" y="7" width="1.4" height="6"/>
+            </g>
+            <g fill="#4A4A4A">
+              <rect x="49" y="6" width="1.4" height="8"/><rect x="52" y="4" width="1.4" height="12"/><rect x="55" y="8" width="1.4" height="4"/><rect x="58" y="3" width="1.4" height="14"/><rect x="61" y="7" width="1.4" height="6"/><rect x="64" y="5" width="1.4" height="10"/><rect x="67" y="9" width="1.4" height="2"/><rect x="70" y="4" width="1.4" height="12"/><rect x="73" y="6" width="1.4" height="8"/><rect x="76" y="8" width="1.4" height="4"/><rect x="79" y="3" width="1.4" height="14"/><rect x="82" y="7" width="1.4" height="6"/><rect x="85" y="5" width="1.4" height="10"/><rect x="88" y="9" width="1.4" height="2"/><rect x="91" y="6" width="1.4" height="8"/><rect x="94" y="4" width="1.4" height="12"/><rect x="97" y="7" width="1.4" height="6"/>
+            </g>
+          </svg>
+          <div class="transport"><span>0:45</span><span>Speed 100% · Pitch 0 st</span><span>4:02</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <h2>Need help?</h2>
-    <p>For questions, bug reports, or feedback, get in touch:</p>
-    <p><a class="email" href="mailto:taikatalvi13@gmail.com">taikatalvi13@gmail.com</a></p>
+  <section id="features">
+    <div class="wrap">
+      <div class="section-title">Features</div>
+      <h2>Everything you need to learn a part</h2>
+      <div class="grid">
+        <div class="card"><div class="icon">🎯</div><h3>Chromatic tuner</h3><p>Fast, accurate pitch detection with cents readout, adjustable A4 reference and flats/sharps naming.</p></div>
+        <div class="card"><div class="icon">🎸</div><h3>Chord &amp; key detection</h3><p>EarString analyses a track and shows the chords as it plays, with the detected key and tempo.</p></div>
+        <div class="card"><div class="icon">🐢</div><h3>Slow down, keep pitch</h3><p>Drop the speed to catch a fast lick without changing the pitch, or transpose in semitones.</p></div>
+        <div class="card"><div class="icon">🔁</div><h3>A–B loop</h3><p>Loop the hard two bars and drill them until they're clean, then move on.</p></div>
+        <div class="card"><div class="icon">🎚️</div><h3>10-band equalizer</h3><p>A graphic EQ with a draggable response curve and presets to shape the sound to your ear.</p></div>
+        <div class="card"><div class="icon">🎛️</div><h3>AI stem separation</h3><p>Split a song into vocals, drums, bass, guitar, piano and more — on-device — to mute or solo any part.</p></div>
+      </div>
+    </div>
+  </section>
 
-    <h2>Common questions</h2>
-    <p><strong>Stem separation is slow or heats up my device.</strong>
-    Separation runs a neural model fully on-device; it's compute-heavy. Keep
-    the app in the foreground until it finishes — leaving the app cancels it.</p>
-    <p><strong>Online lyrics don't appear.</strong> Lyrics are fetched from a
-    public database by title and artist; some songs simply aren't in it. Make
-    sure the online lyrics option is enabled in settings and you're online.</p>
+  <section id="platforms">
+    <div class="wrap">
+      <div class="section-title">Platforms</div>
+      <h2>One app, iPhone to Mac</h2>
+      <div class="split">
+        <div class="plat">
+          <h3>iPhone &amp; iPad</h3>
+          <ul>
+            <li>Tuner, chord and beat detection</li>
+            <li>Slow-down, A–B loops, transpose</li>
+            <li>On-device AI stem separation</li>
+            <li>Share and import from Files</li>
+          </ul>
+          <p class="note">Everything runs on-device — your music is never uploaded for processing.</p>
+        </div>
+        <div class="plat">
+          <h3>Mac</h3>
+          <ul>
+            <li>The same player on a bigger screen</li>
+            <li>Full library with search</li>
+            <li>Equalizer and stem mixer side by side</li>
+            <li>Drag in audio files to analyse</li>
+          </ul>
+          <p class="note">Your EarString Pro unlock is shared across iOS and macOS under your Apple ID.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h2>EarString Pro</h2>
-    <p>Stem separation is a Pro feature, available as a monthly subscription or
-    a one-time lifetime unlock. Manage or cancel subscriptions anytime in your
-    Apple ID account settings.</p>
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-title">Pricing</div>
+      <h2>Free to practice. Pro to isolate.</h2>
+      <div class="pricing">
+        <div class="price">
+          <h3>Free</h3>
+          <div class="amount">$0</div>
+          <ul>
+            <li>Chromatic tuner</li>
+            <li>Chord, key &amp; tempo detection</li>
+            <li>Slow-down and A–B loops</li>
+            <li>Player and library</li>
+          </ul>
+        </div>
+        <div class="price pro">
+          <h3>EarString Pro</h3>
+          <div class="amount">$4.99<span class="muted" style="font-size:14px;font-weight:500">/mo · $59.99 lifetime</span></div>
+          <ul>
+            <li>AI stem separation</li>
+            <li>10-band graphic equalizer</li>
+            <li>Shared across iOS &amp; macOS</li>
+            <li>One-time lifetime option</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h2>Legal</h2>
-    <p class="links">
-      <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
-      <a href="terms.html">Terms of Use</a>
-    </p>
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-title">FAQ</div>
+      <h2>Good to know</h2>
+      <details><summary>Stem separation is slow or heats up my device.</summary><p>Separation runs a neural model fully on-device, so it's compute-heavy. Keep the app in the foreground until it finishes — leaving the app cancels the run.</p></details>
+      <details><summary>Online lyrics don't appear.</summary><p>Lyrics are fetched from a public database by title and artist; some songs simply aren't in it. Make sure the online lyrics option is enabled in settings and you're online.</p></details>
+      <details><summary>How does EarString Pro work across my devices?</summary><p>Pro unlocks AI stem separation and the equalizer. It's a monthly subscription or a one-time lifetime unlock, and it's shared across iOS and macOS under the same Apple ID. Manage or cancel anytime in your Apple ID account settings.</p></details>
+      <details><summary>Does EarString collect my data?</summary><p>No accounts and no analytics. Your audio is analysed and separated locally and never leaves your device; purchases are handled by Apple.</p></details>
+    </div>
+  </section>
 
-    <footer>&copy; 2026 EarString</footer>
-  </main>
+  <footer>
+    <div class="wrap">
+      <div>
+        <div class="brand" style="margin-bottom:8px">EarString</div>
+        <div class="muted">© 2026 EarString. Guitar tuner, chord &amp; stem trainer for iOS &amp; macOS.</div>
+      </div>
+      <div>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
